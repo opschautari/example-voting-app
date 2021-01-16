@@ -7,6 +7,8 @@ var bg2 = document.getElementById('background-stats-2');
 app.controller('statsCtrl', function($scope){
   $scope.aPercent = 50;
   $scope.bPercent = 50;
+  $scope.optionA = process.env["OPTION_A"]
+  $scope.optionB = process.env["OPTION_B"]
 
   var updateScores = function(){
     socket.on('scores', function (json) {
