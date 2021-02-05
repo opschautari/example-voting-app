@@ -5,8 +5,8 @@ var bg1 = document.getElementById('background-stats-1');
 var bg2 = document.getElementById('background-stats-2');
 
 app.controller('statsCtrl', function($scope){
-  $scope.aPercent = 50;
-  $scope.bPercent = 50;
+  $scope.aPercent = 40;
+  $scope.bPercent = 60;
   $scope.optionA = process.env["OPTION_A"]
   $scope.optionB = process.env["OPTION_B"]
 
