@@ -37,5 +37,5 @@ jobs:
           platforms: linux/amd64,arm64,linux/386
           push: true
           tags: |
-            opschautari/opschautari/example-voting-app/result:${GITHUB_SHA}
-            opschautari/opschautari/example-voting-app/result:latest
+            opschautari/example-voting-app:result-${GITHUB_SHA}
+            opschautari/example-voting-app:result-latest
