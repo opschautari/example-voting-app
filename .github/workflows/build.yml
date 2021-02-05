@@ -39,4 +39,4 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: |
-            opschautari/example-voting-app:result-latest
+            ghcr.io/opschautari/example-voting-app:result-latest
