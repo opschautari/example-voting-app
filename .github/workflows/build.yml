@@ -36,7 +36,7 @@ jobs:
           tag_with_ref: true
           context: .
           file: ./result/Dockerfile
-          platforms: linux/amd64,arm64,linux/386
+          platforms: linux/amd64
           push: true
           tags: |
             opschautari/example-voting-app:result-latest
