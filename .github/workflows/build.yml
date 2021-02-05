@@ -34,7 +34,7 @@ jobs:
           registry: docker.pkg.github.com
           repository: opschautari/opschautari/example-voting-app
           tag_with_ref: true
-          context: .
+          context: ./result
           file: ./result/Dockerfile
           platforms: linux/amd64
           push: true
