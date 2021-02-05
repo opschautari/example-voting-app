@@ -1,0 +1,41 @@
+name: Publish Docker image
+on:
+  push:
+    branches:
+      - main
+      - master
+      - continuous-builds
+jobs:
+  push_to_registry:
+    name: Push Docker image to GitHub Container Registry
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            result:
+              - 'result/**'
+            vote:
+              - 'vote/**'
+            worker:
+              - 'worker/**'
+
+      - if: steps.filter.outputs.result== 'true'
+        name: Build Results
+        uses: docker/build-push-action@v2
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: opschautari/opschautari/example-voting-app
+          tag_with_ref: true
+          context: .
+          file: ./result/Dockerfile
+          platforms: linux/amd64,arm64,linux/386
+          push: true
+          tags: |
+            opschautari/opschautari/example-voting-app/result:${GITHUB_SHA}
+            opschautari/opschautari/example-voting-app/result:latest
