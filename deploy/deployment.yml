@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voting-app
+  labels:
+    name: voting-app
+    stack: python
+  namespace: thapakazi
+spec:
+  selector:
+    matchLabels:
+      name: voting-app
+  template:
+    metadata:
+      labels:
+        name: voting-app
+    spec:
+      containers:
+        - image: ghcr.io/opschautari/example-voting-app:vote-latest
+          name: vote
+
+# redis deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+  labels:
+    stack: database
+  namespace: thapakazi
+spec:
+  selector:
+    matchLabels:
+      app: redis-pod
+  template:
+    metadata:
+      labels:
+        app: redis-pod
+        type: inmemory
+    spec:
+      containers:
+        - image: redis
+          name: redis-container
+
+---
+# redis service, so vote app can resolve redis pods
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: thapakazi
+spec:
+  selector:
+    app: redis-pod               # select pods with label {app: my-app}
+  ports:
+   - protocol: TCP
+     port: 6379                 # service listens on this port
+     targetPort: 6379         # container port to forward request to
