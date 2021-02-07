@@ -54,7 +54,7 @@ jobs:
           tags: |
             ghcr.io/opschautari/example-voting-app:worker-latest
       -
-        if: steps.filter.outputs.result== 'true'
+        if: steps.filter.outputs.vote== 'true'
         name: Build Vote
         uses: docker/build-push-action@v2
         with:

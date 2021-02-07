@@ -7,7 +7,7 @@ RUN dotnet restore
 COPY src/Worker/ .
 RUN dotnet publish -c Release -o /out Worker.csproj
 
-# app image
+# app image, test trigger build
 FROM mcr.microsoft.com/dotnet/core/runtime:2.1
 
 WORKDIR /app
